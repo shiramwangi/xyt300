@@ -19,30 +19,30 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import axios from 'axios'
+import { ref, onMounted } from 'vue';
+import axios from 'axios';
 
-const skillsCount = ref(0)
-const projectsCount = ref(0)
-const suggestionsCount = ref(0)
+const skillsCount = ref(0);
+const projectsCount = ref(0);
+const suggestionsCount = ref(0);
 
 const fetchCounts = async () => {
   try {
     const [skills, projects, suggestions] = await Promise.all([
       axios.get('/api/skills'),
       axios.get('/api/projects'),
-      axios.get('/api/suggestions')
-    ])
-    
-    skillsCount.value = skills.data.length
-    projectsCount.value = projects.data.length
-    suggestionsCount.value = suggestions.data.length
-  } catch (error) {
-    console.error('Error fetching counts:', error)
-  }
-}
+      axios.get('/api/suggestions'),
+    ]);
 
-onMounted(fetchCounts)
+    skillsCount.value = skills.data.length;
+    projectsCount.value = projects.data.length;
+    suggestionsCount.value = suggestions.data.length;
+  } catch (error) {
+    console.error('Error fetching counts:', error);
+  }
+};
+
+onMounted(fetchCounts);
 </script>
 
 <style scoped>
@@ -77,4 +77,4 @@ onMounted(fetchCounts)
   font-weight: bold;
   color: #3498db;
 }
-</style> 
+</style>

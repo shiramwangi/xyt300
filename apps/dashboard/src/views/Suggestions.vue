@@ -16,37 +16,37 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import axios from 'axios'
+import { ref, onMounted } from 'vue';
+import axios from 'axios';
 
 interface Suggestion {
-  id: string
-  content: string
-  type: string
-  userId: string
-  createdAt: string
+  id: string;
+  content: string;
+  type: string;
+  userId: string;
+  createdAt: string;
 }
 
-const suggestions = ref<Suggestion[]>([])
+const suggestions = ref<Suggestion[]>([]);
 
 const fetchSuggestions = async () => {
   try {
-    const response = await axios.get('/api/suggestions')
-    suggestions.value = response.data
+    const response = await axios.get('/api/suggestions');
+    suggestions.value = response.data;
   } catch (error) {
-    console.error('Error fetching suggestions:', error)
+    console.error('Error fetching suggestions:', error);
   }
-}
+};
 
 const formatDate = (dateString: string) => {
   return new Date(dateString).toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'short',
-    day: 'numeric'
-  })
-}
+    day: 'numeric',
+  });
+};
 
-onMounted(fetchSuggestions)
+onMounted(fetchSuggestions);
 </script>
 
 <style scoped>
@@ -103,4 +103,4 @@ onMounted(fetchSuggestions)
   color: #2c3e50;
   line-height: 1.5;
 }
-</style> 
+</style>

@@ -1,8 +1,8 @@
-import React from 'react'
-import { Menu, Transition } from '@headlessui/react'
-import { ChevronDown, User } from 'lucide-react'
-import { Fragment } from 'react'
-import { cn } from '@/lib/utils'
+import React from 'react';
+import { Menu, Transition } from '@headlessui/react';
+import { ChevronDown, User } from 'lucide-react';
+import { Fragment } from 'react';
+import { cn } from '@/lib/utils';
 
 export default function Topbar() {
   return (
@@ -36,7 +36,7 @@ export default function Topbar() {
                       href="#profile"
                       className={cn(
                         active ? 'bg-secondary-50' : '',
-                        'block px-4 py-2 text-sm text-secondary-700'
+                        'block px-4 py-2 text-sm text-secondary-700',
                       )}
                     >
                       Profile
@@ -49,7 +49,7 @@ export default function Topbar() {
                       href="#settings"
                       className={cn(
                         active ? 'bg-secondary-50' : '',
-                        'block px-4 py-2 text-sm text-secondary-700'
+                        'block px-4 py-2 text-sm text-secondary-700',
                       )}
                     >
                       Settings
@@ -62,7 +62,7 @@ export default function Topbar() {
                       href="#logout"
                       className={cn(
                         active ? 'bg-secondary-50' : '',
-                        'block px-4 py-2 text-sm text-red-600'
+                        'block px-4 py-2 text-sm text-red-600',
                       )}
                     >
                       Sign out
@@ -75,5 +75,5 @@ export default function Topbar() {
         </Menu>
       </div>
     </header>
-  )
-} 
+  );
+}
