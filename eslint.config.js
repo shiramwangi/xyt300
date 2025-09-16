@@ -4,11 +4,12 @@ import ts from 'typescript-eslint'
 import nextPlugin from '@next/eslint-plugin-next'
 import reactHooks from 'eslint-plugin-react-hooks'
 import react from 'eslint-plugin-react'
+import vue from 'eslint-plugin-vue'
+import * as vueParser from 'vue-eslint-parser'
 
 /** @type {import('eslint').Linter.FlatConfig[]} */
 export default [
   js.configs.recommended,
-  ...ts.configs.recommendedTypeChecked,
   {
     ignores: [
       '**/node_modules/**',
@@ -19,14 +20,21 @@ export default [
       '**/.cache/**',
     ],
   },
-  {
+  // TypeScript-specific rules, only for TS files
+  ...ts.configs.recommendedTypeChecked.map((cfg) => ({
+    ...cfg,
     files: ['**/*.{ts,tsx}'],
     languageOptions: {
+      ...cfg.languageOptions,
       parserOptions: {
+        ...(cfg.languageOptions?.parserOptions ?? {}),
         projectService: true,
         tsconfigRootDir: import.meta.dirname,
       },
     },
+  })),
+  {
+    files: ['**/*.{ts,tsx}'],
     rules: {
       '@typescript-eslint/consistent-type-imports': 'warn',
       '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
@@ -43,7 +51,10 @@ export default [
     rules: {
       'react/jsx-uses-react': 'off',
       'react/react-in-jsx-scope': 'off',
+      // Start from recommended, but disable problematic rules for app router
       ...nextPlugin.configs.recommended.rules,
+      '@next/next/no-html-link-for-pages': 'off',
+      '@next/next/no-duplicate-head': 'off',
       ...react.configs.recommended.rules,
       ...reactHooks.configs.recommended.rules,
     },
@@ -51,18 +62,24 @@ export default [
       react: { version: 'detect' },
     },
   },
-  // Vue app (plugins added in separate PR)
+  // Vue app
   {
     files: ['apps/dashboard/**/*.{ts,tsx,vue}'],
+    plugins: { vue },
+    languageOptions: {
+      parser: /** @type {any} */ (vueParser),
+      parserOptions: {
+        parser: ts.parser,
+        extraFileExtensions: ['.vue'],
+      },
+    },
+    rules: {
+      ...vue.configs['flat/recommended'].rules,
+    },
   },
   // Backend (Node)
   {
     files: ['packages/backend/src/**/*.ts'],
-    languageOptions: {
-      globals: {
-        node: true,
-      },
-    },
     rules: {
       'no-console': 'off',
     },
