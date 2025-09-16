@@ -13,11 +13,13 @@ A Next.js portfolio website that showcases projects and skills.
 ## Getting Started
 
 1. Install dependencies:
+
 ```bash
 npm install
 ```
 
 2. Run the development server:
+
 ```bash
 npm run dev
 ```
@@ -42,4 +44,4 @@ npm start
 - React
 - Tailwind CSS
 - TypeScript
-- Axios for API requests 
+- Axios for API requests

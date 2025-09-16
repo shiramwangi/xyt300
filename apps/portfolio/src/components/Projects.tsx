@@ -1,35 +1,35 @@
-import { useEffect, useState } from 'react'
-import axios from 'axios'
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 interface Project {
-  id: string
-  title: string
-  description: string
-  techStack: string[]
-  githubUrl: string
+  id: string;
+  title: string;
+  description: string;
+  techStack: string[];
+  githubUrl: string;
 }
 
 export default function Projects() {
-  const [projects, setProjects] = useState<Project[]>([])
-  const [loading, setLoading] = useState(true)
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/api/projects')
-        setProjects(response.data)
+        const response = await axios.get('http://localhost:3000/api/projects');
+        setProjects(response.data);
       } catch (error) {
-        console.error('Error fetching projects:', error)
+        console.error('Error fetching projects:', error);
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
-    }
+    };
 
-    fetchProjects()
-  }, [])
+    fetchProjects();
+  }, []);
 
   if (loading) {
-    return <div>Loading projects...</div>
+    return <div>Loading projects...</div>;
   }
 
   return (
@@ -42,9 +42,7 @@ export default function Projects() {
             className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
           >
             <div className="p-6">
-              <h3 className="text-xl font-semibold text-secondary mb-2">
-                {project.title}
-              </h3>
+              <h3 className="text-xl font-semibold text-secondary mb-2">{project.title}</h3>
               <p className="text-gray-600 mb-4">{project.description}</p>
               <div className="flex flex-wrap gap-2 mb-4">
                 {project.techStack.map((tech) => (
@@ -63,12 +61,7 @@ export default function Projects() {
                 className="inline-flex items-center text-primary hover:text-primary/80 transition-colors"
               >
                 View on GitHub
-                <svg
-                  className="w-4 h-4 ml-2"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
+                <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -82,5 +75,5 @@ export default function Projects() {
         ))}
       </div>
     </section>
-  )
-} 
+  );
+}

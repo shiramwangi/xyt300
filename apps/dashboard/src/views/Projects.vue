@@ -10,39 +10,37 @@
             {{ tech }}
           </span>
         </div>
-        <a :href="project.githubUrl" target="_blank" class="github-link">
-          View on GitHub
-        </a>
+        <a :href="project.githubUrl" target="_blank" class="github-link"> View on GitHub </a>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import axios from 'axios'
+import { ref, onMounted } from 'vue';
+import axios from 'axios';
 
 interface Project {
-  id: string
-  title: string
-  description: string
-  techStack: string[]
-  githubUrl: string
-  userId: string
+  id: string;
+  title: string;
+  description: string;
+  techStack: string[];
+  githubUrl: string;
+  userId: string;
 }
 
-const projects = ref<Project[]>([])
+const projects = ref<Project[]>([]);
 
 const fetchProjects = async () => {
   try {
-    const response = await axios.get('/api/projects')
-    projects.value = response.data
+    const response = await axios.get('/api/projects');
+    projects.value = response.data;
   } catch (error) {
-    console.error('Error fetching projects:', error)
+    console.error('Error fetching projects:', error);
   }
-}
+};
 
-onMounted(fetchProjects)
+onMounted(fetchProjects);
 </script>
 
 <style scoped>
@@ -103,4 +101,4 @@ onMounted(fetchProjects)
 .github-link:hover {
   text-decoration: underline;
 }
-</style> 
+</style>

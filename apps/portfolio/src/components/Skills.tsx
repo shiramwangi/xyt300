@@ -1,34 +1,34 @@
-import { useEffect, useState } from 'react'
-import axios from 'axios'
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 interface Skill {
-  id: string
-  name: string
-  level: number
-  category: string
+  id: string;
+  name: string;
+  level: number;
+  category: string;
 }
 
 export default function Skills() {
-  const [skills, setSkills] = useState<Skill[]>([])
-  const [loading, setLoading] = useState(true)
+  const [skills, setSkills] = useState<Skill[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchSkills = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/api/skills')
-        setSkills(response.data)
+        const response = await axios.get('http://localhost:3000/api/skills');
+        setSkills(response.data);
       } catch (error) {
-        console.error('Error fetching skills:', error)
+        console.error('Error fetching skills:', error);
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
-    }
+    };
 
-    fetchSkills()
-  }, [])
+    fetchSkills();
+  }, []);
 
   if (loading) {
-    return <div>Loading skills...</div>
+    return <div>Loading skills...</div>;
   }
 
   return (
@@ -40,9 +40,7 @@ export default function Skills() {
             key={skill.id}
             className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow"
           >
-            <h3 className="text-xl font-semibold text-secondary mb-2">
-              {skill.name}
-            </h3>
+            <h3 className="text-xl font-semibold text-secondary mb-2">{skill.name}</h3>
             <div className="flex items-center mb-2">
               <div className="w-full bg-gray-200 rounded-full h-2.5">
                 <div
@@ -57,5 +55,5 @@ export default function Skills() {
         ))}
       </div>
     </section>
-  )
-} 
+  );
+}

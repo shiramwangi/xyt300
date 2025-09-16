@@ -1,15 +1,8 @@
-import React from 'react'
-import DashboardLayout from '@/components/layout/DashboardLayout'
-import { Card } from '@/components/ui/Card'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/Tabs'
-import { 
-  BarChart3, 
-  Target, 
-  Code2, 
-  Lightbulb,
-  TrendingUp,
-  Users
-} from 'lucide-react'
+import React from 'react';
+import DashboardLayout from '@/components/layout/DashboardLayout';
+import { Card } from '@/components/ui/Card';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/Tabs';
+import { BarChart3, Target, Code2, Lightbulb, TrendingUp, Users } from 'lucide-react';
 
 const metrics = [
   {
@@ -40,7 +33,7 @@ const metrics = [
     change: '+5%',
     changeType: 'positive',
   },
-]
+];
 
 export default function DashboardPage() {
   return (
@@ -58,12 +51,8 @@ export default function DashboardPage() {
             <Card key={metric.name} className="p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-medium text-secondary-600">
-                    {metric.name}
-                  </p>
-                  <p className="mt-2 text-3xl font-semibold text-secondary-900">
-                    {metric.value}
-                  </p>
+                  <p className="text-sm font-medium text-secondary-600">{metric.name}</p>
+                  <p className="mt-2 text-3xl font-semibold text-secondary-900">{metric.value}</p>
                 </div>
                 <div className="rounded-full bg-primary-50 p-3">
                   <metric.icon className="h-6 w-6 text-primary-600" />
@@ -72,16 +61,12 @@ export default function DashboardPage() {
               <div className="mt-4">
                 <span
                   className={`inline-flex items-center text-sm font-medium ${
-                    metric.changeType === 'positive'
-                      ? 'text-green-600'
-                      : 'text-red-600'
+                    metric.changeType === 'positive' ? 'text-green-600' : 'text-red-600'
                   }`}
                 >
                   {metric.change}
                 </span>
-                <span className="ml-2 text-sm text-secondary-600">
-                  from last month
-                </span>
+                <span className="ml-2 text-sm text-secondary-600">from last month</span>
               </div>
             </Card>
           ))}
@@ -97,27 +82,21 @@ export default function DashboardPage() {
 
           <TabsContent value="overview" className="space-y-4">
             <Card className="p-6">
-              <h3 className="text-lg font-medium text-secondary-900">
-                Recent Activity
-              </h3>
+              <h3 className="text-lg font-medium text-secondary-900">Recent Activity</h3>
               {/* Add activity timeline or chart here */}
             </Card>
           </TabsContent>
 
           <TabsContent value="skills" className="space-y-4">
             <Card className="p-6">
-              <h3 className="text-lg font-medium text-secondary-900">
-                Skill Progress
-              </h3>
+              <h3 className="text-lg font-medium text-secondary-900">Skill Progress</h3>
               {/* Add skills progress chart here */}
             </Card>
           </TabsContent>
 
           <TabsContent value="goals" className="space-y-4">
             <Card className="p-6">
-              <h3 className="text-lg font-medium text-secondary-900">
-                Goals & Milestones
-              </h3>
+              <h3 className="text-lg font-medium text-secondary-900">Goals & Milestones</h3>
               {/* Add goals list or progress here */}
             </Card>
           </TabsContent>
@@ -126,9 +105,7 @@ export default function DashboardPage() {
             <Card className="p-6">
               <div className="flex items-center gap-2">
                 <Lightbulb className="h-5 w-5 text-primary-600" />
-                <h3 className="text-lg font-medium text-secondary-900">
-                  AI Suggestions
-                </h3>
+                <h3 className="text-lg font-medium text-secondary-900">AI Suggestions</h3>
               </div>
               {/* Add AI suggestions here */}
             </Card>
@@ -136,5 +113,5 @@ export default function DashboardPage() {
         </Tabs>
       </div>
     </DashboardLayout>
-  )
-} 
+  );
+}

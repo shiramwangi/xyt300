@@ -47,4 +47,4 @@
   .btn-secondary {
     @apply bg-secondary-100 text-secondary-900 hover:bg-secondary-200;
   }
-} 
+}
