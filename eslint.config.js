@@ -20,6 +20,29 @@ export default [
       '**/.cache/**',
     ],
   },
+  // Next.js app
+  {
+    files: ['apps/portfolio/**/*.{ts,tsx}'],
+    plugins: {
+      '@next/next': nextPlugin,
+      'react-hooks': reactHooks,
+      react,
+    },
+    rules: {
+      'react/jsx-uses-react': 'off',
+      'react/react-in-jsx-scope': 'off',
+      // Start from recommended, but disable problematic rules for app router
+      ...nextPlugin.configs.recommended.rules,
+      '@next/next/no-html-link-for-pages': 'off',
+      '@next/next/no-duplicate-head': 'off',
+      ...react.configs.recommended.rules,
+      ...reactHooks.configs.recommended.rules,
+    },
+    settings: {
+      react: { version: 'detect' },
+    },
+  },
+  // TypeScript-specific rules, only for TS files (after framework configs so overrides stick)
   ...ts.configs.recommendedTypeChecked.map((cfg) => ({
     ...cfg,
     files: ['**/*.{ts,tsx}'],
@@ -39,24 +62,7 @@ export default [
       '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
     },
   },
-  {
-    files: ['apps/portfolio/**/*.{ts,tsx}'],
-    plugins: {
-      '@next/next': nextPlugin,
-      'react-hooks': reactHooks,
-      react,
-    },
-    rules: {
-      'react/jsx-uses-react': 'off',
-      'react/react-in-jsx-scope': 'off',
-      ...nextPlugin.configs.recommended.rules,
-      ...react.configs.recommended.rules,
-      ...reactHooks.configs.recommended.rules,
-    },
-    settings: {
-      react: { version: 'detect' },
-    },
-  },
+  // Vue app
   {
     files: ['apps/dashboard/**/*.{ts,tsx,vue}'],
     plugins: { vue },
@@ -71,6 +77,7 @@ export default [
       ...vue.configs['flat/recommended'].rules,
     },
   },
+  // Backend (Node)
   {
     files: ['packages/backend/src/**/*.ts'],
     rules: {
