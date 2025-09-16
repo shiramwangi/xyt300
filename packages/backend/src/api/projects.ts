@@ -3,12 +3,44 @@ import prisma from '../lib/prisma';
 
 const router = Router();
 
-// Get all projects
+// Get all projects (with optional filtering)
 router.get('/', async (req, res) => {
   try {
+    const { q, tech, userId } = req.query as {
+      q?: string;
+      tech?: string | string[];
+      userId?: string;
+    };
+
+    const technologies = Array.isArray(tech)
+      ? tech
+      : typeof tech === 'string' && tech.trim().length > 0
+      ? tech.split(',').map((t) => t.trim()).filter(Boolean)
+      : [];
+
+    const whereClause: Parameters<typeof prisma.project.findMany>[0]['where'] = {};
+
+    if (q && q.trim().length > 0) {
+      whereClause.OR = [
+        { title: { contains: q, mode: 'insensitive' } },
+        { description: { contains: q, mode: 'insensitive' } },
+      ];
+    }
+
+    if (technologies.length > 0) {
+      whereClause.techStack = { hasSome: technologies };
+    }
+
+    if (userId && userId.trim().length > 0) {
+      whereClause.userId = userId;
+    }
+
     const projects = await prisma.project.findMany({
+      where: whereClause,
       include: { user: true },
+      orderBy: { title: 'asc' },
     });
+
     res.json(projects);
   } catch (error) {
     res.status(500).json({ error: 'Failed to fetch projects' });
