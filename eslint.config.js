@@ -1,6 +1,10 @@
 // @ts-check
 import js from '@eslint/js'
 import ts from 'typescript-eslint'
+import nextPlugin from '@next/eslint-plugin-next'
+import reactHooks from 'eslint-plugin-react-hooks'
+import react from 'eslint-plugin-react'
+import vue from 'eslint-plugin-vue'
 
 /** @type {import('eslint').Linter.FlatConfig[]} */
 export default [
@@ -32,16 +36,35 @@ export default [
   // Next.js app
   {
     files: ['apps/portfolio/**/*.{ts,tsx}'],
+    plugins: {
+      '@next/next': nextPlugin,
+      'react-hooks': reactHooks,
+      react,
+    },
     rules: {
       'react/jsx-uses-react': 'off',
       'react/react-in-jsx-scope': 'off',
+      ...nextPlugin.configs.recommended.rules,
+      ...react.configs.recommended.rules,
+      ...reactHooks.configs.recommended.rules,
+    },
+    settings: {
+      react: { version: 'detect' },
     },
   },
   // Vue app
   {
     files: ['apps/dashboard/**/*.{ts,tsx,vue}'],
-    plugins: {
-      // Using eslint-plugin-vue in legacy mode via flat config compatibility
+    plugins: { vue },
+    languageOptions: {
+      parser: require('vue-eslint-parser'),
+      parserOptions: {
+        parser: ts.parser,
+        extraFileExtensions: ['.vue'],
+      },
+    },
+    rules: {
+      ...vue.configs['flat/recommended'].rules,
     },
   },
   // Backend (Node)
