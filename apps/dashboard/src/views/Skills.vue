@@ -14,29 +14,29 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import axios from 'axios'
+import { ref, onMounted } from 'vue';
+import axios from 'axios';
 
 interface Skill {
-  id: string
-  name: string
-  level: number
-  category: string
-  userId: string
+  id: string;
+  name: string;
+  level: number;
+  category: string;
+  userId: string;
 }
 
-const skills = ref<Skill[]>([])
+const skills = ref<Skill[]>([]);
 
 const fetchSkills = async () => {
   try {
-    const response = await axios.get('/api/skills')
-    skills.value = response.data
+    const response = await axios.get('/api/skills');
+    skills.value = response.data;
   } catch (error) {
-    console.error('Error fetching skills:', error)
+    console.error('Error fetching skills:', error);
   }
-}
+};
 
-onMounted(fetchSkills)
+onMounted(fetchSkills);
 </script>
 
 <style scoped>
@@ -79,4 +79,4 @@ onMounted(fetchSkills)
   color: #7f8c8d;
   margin: 0;
 }
-</style> 
+</style>
