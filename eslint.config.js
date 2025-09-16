@@ -5,11 +5,11 @@ import nextPlugin from '@next/eslint-plugin-next'
 import reactHooks from 'eslint-plugin-react-hooks'
 import react from 'eslint-plugin-react'
 import vue from 'eslint-plugin-vue'
+import * as vueParser from 'vue-eslint-parser'
 
 /** @type {import('eslint').Linter.FlatConfig[]} */
 export default [
   js.configs.recommended,
-  ...ts.configs.recommendedTypeChecked,
   {
     ignores: [
       '**/node_modules/**',
@@ -20,20 +20,25 @@ export default [
       '**/.cache/**',
     ],
   },
-  {
+  ...ts.configs.recommendedTypeChecked.map((cfg) => ({
+    ...cfg,
     files: ['**/*.{ts,tsx}'],
     languageOptions: {
+      ...cfg.languageOptions,
       parserOptions: {
+        ...(cfg.languageOptions?.parserOptions ?? {}),
         projectService: true,
         tsconfigRootDir: import.meta.dirname,
       },
     },
+  })),
+  {
+    files: ['**/*.{ts,tsx}'],
     rules: {
       '@typescript-eslint/consistent-type-imports': 'warn',
       '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
     },
   },
-  // Next.js app
   {
     files: ['apps/portfolio/**/*.{ts,tsx}'],
     plugins: {
@@ -52,12 +57,11 @@ export default [
       react: { version: 'detect' },
     },
   },
-  // Vue app
   {
     files: ['apps/dashboard/**/*.{ts,tsx,vue}'],
     plugins: { vue },
     languageOptions: {
-      parser: require('vue-eslint-parser'),
+      parser: /** @type {any} */ (vueParser),
       parserOptions: {
         parser: ts.parser,
         extraFileExtensions: ['.vue'],
@@ -67,14 +71,8 @@ export default [
       ...vue.configs['flat/recommended'].rules,
     },
   },
-  // Backend (Node)
   {
     files: ['packages/backend/src/**/*.ts'],
-    languageOptions: {
-      globals: {
-        node: true,
-      },
-    },
     rules: {
       'no-console': 'off',
     },
