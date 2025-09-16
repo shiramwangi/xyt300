@@ -20,26 +20,6 @@ export default [
       '**/.cache/**',
     ],
   },
-  // TypeScript-specific rules, only for TS files
-  ...ts.configs.recommendedTypeChecked.map((cfg) => ({
-    ...cfg,
-    files: ['**/*.{ts,tsx}'],
-    languageOptions: {
-      ...cfg.languageOptions,
-      parserOptions: {
-        ...(cfg.languageOptions?.parserOptions ?? {}),
-        projectService: true,
-        tsconfigRootDir: import.meta.dirname,
-      },
-    },
-  })),
-  {
-    files: ['**/*.{ts,tsx}'],
-    rules: {
-      '@typescript-eslint/consistent-type-imports': 'warn',
-      '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
-    },
-  },
   // Next.js app
   {
     files: ['apps/portfolio/**/*.{ts,tsx}'],
@@ -60,6 +40,26 @@ export default [
     },
     settings: {
       react: { version: 'detect' },
+    },
+  },
+  // TypeScript-specific rules, only for TS files (after framework configs so overrides stick)
+  ...ts.configs.recommendedTypeChecked.map((cfg) => ({
+    ...cfg,
+    files: ['**/*.{ts,tsx}'],
+    languageOptions: {
+      ...cfg.languageOptions,
+      parserOptions: {
+        ...(cfg.languageOptions?.parserOptions ?? {}),
+        projectService: true,
+        tsconfigRootDir: import.meta.dirname,
+      },
+    },
+  })),
+  {
+    files: ['**/*.{ts,tsx}'],
+    rules: {
+      '@typescript-eslint/consistent-type-imports': 'warn',
+      '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
     },
   },
   // Vue app
