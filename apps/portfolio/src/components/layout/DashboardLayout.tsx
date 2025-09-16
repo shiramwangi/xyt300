@@ -1,9 +1,9 @@
-import React from 'react'
-import Topbar from './Topbar'
-import Sidebar from './Sidebar'
+import React from 'react';
+import Topbar from './Topbar';
+import Sidebar from './Sidebar';
 
 interface DashboardLayoutProps {
-  children: React.ReactNode
+  children: React.ReactNode;
 }
 
 export default function DashboardLayout({ children }: DashboardLayoutProps) {
@@ -13,11 +13,9 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
       <div className="flex">
         <Sidebar />
         <main className="flex-1 p-8">
-          <div className="container">
-            {children}
-          </div>
+          <div className="container">{children}</div>
         </main>
       </div>
     </div>
-  )
-} 
+  );
+}

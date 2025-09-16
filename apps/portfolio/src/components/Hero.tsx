@@ -1,5 +1,5 @@
-import React from 'react'
-import { ArrowRight } from 'lucide-react'
+import React from 'react';
+import { ArrowRight } from 'lucide-react';
 
 export default function Hero() {
   return (
@@ -10,21 +10,15 @@ export default function Hero() {
             Hi, I'm <span className="text-primary-600">Your Name</span>
           </h1>
           <p className="mt-6 text-lg leading-8 text-secondary-600">
-            A passionate developer crafting beautiful and functional web experiences.
-            I specialize in building modern web applications with cutting-edge technologies.
+            A passionate developer crafting beautiful and functional web experiences. I specialize
+            in building modern web applications with cutting-edge technologies.
           </p>
           <div className="mt-10 flex items-center gap-x-6">
-            <a
-              href="#projects"
-              className="btn btn-primary px-6 py-3"
-            >
+            <a href="#projects" className="btn btn-primary px-6 py-3">
               View Projects
               <ArrowRight className="ml-2 h-4 w-4" />
             </a>
-            <a
-              href="#contact"
-              className="btn btn-secondary px-6 py-3"
-            >
+            <a href="#contact" className="btn btn-secondary px-6 py-3">
               Contact Me
             </a>
           </div>
@@ -36,5 +30,5 @@ export default function Hero() {
         </div>
       </div>
     </div>
-  )
-} 
+  );
+}
