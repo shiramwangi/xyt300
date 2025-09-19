@@ -1,5 +1,6 @@
 # XYT300 Monorepo
 <img width="2231" height="1348" alt="image" src="https://github.com/user-attachments/assets/2d02fa8a-2d19-401e-be13-756f1ad877d9" />
+<img width="2236" height="1337" alt="image" src="https://github.com/user-attachments/assets/118aca2c-4d1e-460e-95b7-98904802a667" />
 
 This monorepo contains multiple applications and packages:
 
